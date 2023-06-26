@@ -2,18 +2,18 @@ import React from "react";
 import {TaskType} from "./App";
 
 type PropsTypeTitle = {
-    title: string;
-    title2?: number;
-    title3?: boolean;
+    title1: string;
+    title2?: string;
+    title3?: string;
     // tasks: Array<TaskType>; generics
     tasks: TaskType[]; // new syntax for array
 };
 
-export const Todolist = ({title, title2, title3, tasks}: PropsTypeTitle) => {
+export const Todolist = ({title1, title2, title3, tasks}: PropsTypeTitle) => {
     return (
         <div>
             <h3>
-                {title} - {title2}  {title3}
+                {title1} - {title2} {title3}
             </h3>
             <div>
                 <input/>

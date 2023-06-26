@@ -9,9 +9,10 @@ export type TaskType = {
 };
 
 function App() {
-    const title = "what to learn";
-    const title2 = 1;
-    const title3 = true;
+    const title1 = "Base Stack";
+    const title2 = 'Frontend Library and Framework';
+    const title3 = 'Backend Stack';
+
 
     const tasks1 = [
         {id: 1, title: "HTML&CSS", isDone: true},
@@ -35,9 +36,9 @@ function App() {
 
     return (
         <div className="App">
-            <Todolist title={`${title} 1`} title2={title2} title3={title3} tasks={tasks1}/>
-            <Todolist title={`${title} 2`} title2={title2} title3={title3} tasks={tasks2}/>
-            <Todolist title={`${title} 3`} title2={title2} title3={title3} tasks={tasks3}/>
+            <Todolist title1={`${title1} 1`} title2={title1}  tasks={tasks1} />
+            <Todolist title1={`${title1} 2`} title2={title2}  tasks={tasks2}/>
+            <Todolist title1={`${title1} 3`} title2={title3} tasks={tasks3}/>
         </div>
     );
 }
