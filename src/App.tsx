@@ -2,12 +2,6 @@ import React from "react";
 import "./App.css";
 import {Todolist} from "./Todolist";
 
-export type TaskType = {
-    id: number;
-    title: string;
-    isDone: boolean;
-};
-
 function App() {
     const title1 = "Base Stack";
     const title2 = 'Frontend Library and Framework';
@@ -36,8 +30,8 @@ function App() {
 
     return (
         <div className="App">
-            <Todolist title1={`${title1} 1`} title2={title1}  tasks={tasks1} />
-            <Todolist title1={`${title1} 2`} title2={title2}  tasks={tasks2}/>
+            <Todolist title1={`${title1} 1`} title2={title1} tasks={tasks1}/>
+            <Todolist title1={`${title1} 2`} title2={title2} tasks={tasks2}/>
             <Todolist title1={`${title1} 3`} title2={title3} tasks={tasks3}/>
         </div>
     );
