@@ -15,22 +15,24 @@ type PropsTypeTitle = {
     removeItem: (id: number) => void;
     // filterItem: (value: FilterTypeValue) => void
 };
-
 export const Todolist = ({title1, tasks, removeItem,}: PropsTypeTitle) => {
     const [value, setValue] = useState<FilterTypeValue>('All')
 
     const filterItem = (value: FilterTypeValue) => {
         setValue(value)
     }
-    let taskForTodoList = tasks
-
-    if (value === 'Active') {
-        taskForTodoList = tasks.filter(el => !el.isDone)
+    const filterOfIsDone = () => {
+        let taskForTodoList = tasks
+        if (value === 'Active') {
+            return tasks.filter(el => !el.isDone)
+        }
+        if (value === 'Completed') {
+            return tasks.filter(el => el.isDone)
+        }
+        return taskForTodoList
     }
-    if (value === 'Completed') {
-        taskForTodoList = tasks.filter(el => el.isDone)
-    }
 
+    let taskForTodoList = filterOfIsDone()
 
     return (
         <div>
