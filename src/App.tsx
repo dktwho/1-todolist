@@ -10,7 +10,7 @@ export type TaskType = {
 
 function App() {
     const title = "what to learn";
-    const title2 = 100500;
+    const title2 = 1;
     const title3 = true;
 
     const tasks1 = [
@@ -35,9 +35,9 @@ function App() {
 
     return (
         <div className="App">
-            <Todolist title={title} title2={title2} tasks={tasks1}/>
-            <Todolist title={`${title} 2`} title3={title3} tasks={tasks2}/>
-            <Todolist title={`${title} 3`} title3={title3} tasks={tasks3}/>
+            <Todolist title={`${title} 1`} title2={title2} title3={title3} tasks={tasks1}/>
+            <Todolist title={`${title} 2`} title2={title2} title3={title3} tasks={tasks2}/>
+            <Todolist title={`${title} 3`} title2={title2} title3={title3} tasks={tasks3}/>
         </div>
     );
 }

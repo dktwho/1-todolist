@@ -13,7 +13,7 @@ export const Todolist = ({title, title2, title3, tasks}: PropsTypeTitle) => {
     return (
         <div>
             <h3>
-                {title} - {title2} - {title3}
+                {title} - {title2}  {title3}
             </h3>
             <div>
                 <input/>
