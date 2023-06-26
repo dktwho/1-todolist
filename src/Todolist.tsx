@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
+
+type FilterTypeValue = 'All' | 'Active' | 'Completed'
 
 export type TaskType = {
     id: number;
@@ -10,9 +12,26 @@ type PropsTypeTitle = {
     title1?: string;
     // tasks: Array<TaskType>; generics
     tasks: TaskType[]; // new syntax for array
-    removeItem: (id: number) => void
+    removeItem: (id: number) => void;
+    // filterItem: (value: FilterTypeValue) => void
 };
-export const Todolist = ({title1, tasks, removeItem}: PropsTypeTitle) => {
+
+export const Todolist = ({title1, tasks, removeItem,}: PropsTypeTitle) => {
+    const [value, setValue] = useState<FilterTypeValue>('All')
+
+    const filterItem = (value: FilterTypeValue) => {
+        setValue(value)
+    }
+    let taskForTodoList = tasks
+
+    if (value === 'Active') {
+        taskForTodoList = tasks.filter(el => !el.isDone)
+    }
+    if (value === 'Completed') {
+        taskForTodoList = tasks.filter(el => el.isDone)
+    }
+
+
     return (
         <div>
             <h3>
@@ -23,7 +42,7 @@ export const Todolist = ({title1, tasks, removeItem}: PropsTypeTitle) => {
                 <button>text inside button</button>
             </div>
             <ul>
-                {tasks.map((el) => {
+                {taskForTodoList.map((el) => {
                     return (
                         <li key={el.id}>
                             <input type="checkbox" checked={el.isDone} readOnly/>
@@ -34,9 +53,9 @@ export const Todolist = ({title1, tasks, removeItem}: PropsTypeTitle) => {
                 })}
             </ul>
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <button onClick={() => filterItem('All')}>All</button>
+                <button onClick={() => filterItem('Active')}>Active</button>
+                <button onClick={() => filterItem('Completed')}>Completed</button>
             </div>
         </div>
     );

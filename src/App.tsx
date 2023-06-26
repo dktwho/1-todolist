@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import "./App.css";
 import {TaskType, Todolist} from "./Todolist";
 
+// import { filterItem} from "./Todolist";
+
+
 function App() {
     const title1 = "Base Stack";
 
@@ -14,14 +17,30 @@ function App() {
         {id: 6, title: "Svelte", isDone: true},
     ];
     const [tasks, setTasks] = useState(tasks1)
-
     const removeItem = (id: number) => {
         setTasks(tasks.filter(el => el.id !== id))
     }
 
+    // const [value, setValue] = useState<FilterTypeValue>('All')
+    // let taskForTodoList = tasks
+    // if (value === 'Active') {
+    //     taskForTodoList = tasks.filter(el => !el.isDone)
+    // }
+    // if (value === 'Completed') {
+    //     taskForTodoList = tasks.filter(el => el.isDone)
+    // }
+    // const filterItem = (value: FilterTypeValue) => {
+    //     setValue(value)
+    // }
+
     return (
         <div className="App">
-            <Todolist title1={`${title1} 1`} tasks={tasks} removeItem={removeItem}/>
+            <Todolist
+                title1={`${title1} 1`}
+                tasks={tasks}
+                removeItem={removeItem}
+                // filterItem={filterItem}
+            />
         </div>
     );
 }
