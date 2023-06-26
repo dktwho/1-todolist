@@ -22,17 +22,18 @@ export const Todolist = ({title1, tasks, removeItem,}: PropsTypeTitle) => {
         setValue(value)
     }
     const filterOfIsDone = () => {
-        let taskForTodoList = tasks
-        if (value === 'Active') {
-            return tasks.filter(el => !el.isDone)
-        }
-        if (value === 'Completed') {
-            return tasks.filter(el => el.isDone)
-        }
-        return taskForTodoList
-    }
 
-    let taskForTodoList = filterOfIsDone()
+        switch (value) {
+            case 'Active': {
+                return tasks.filter(el => !el.isDone)
+            }
+            case 'Completed': {
+                return tasks.filter(el => el.isDone)
+            }
+            default:
+                return tasks
+        }
+    }
 
     return (
         <div>
@@ -44,7 +45,7 @@ export const Todolist = ({title1, tasks, removeItem,}: PropsTypeTitle) => {
                 <button>text inside button</button>
             </div>
             <ul>
-                {taskForTodoList.map((el) => {
+                {filterOfIsDone().map((el) => {
                     return (
                         <li key={el.id}>
                             <input type="checkbox" checked={el.isDone} readOnly/>
@@ -61,4 +62,4 @@ export const Todolist = ({title1, tasks, removeItem,}: PropsTypeTitle) => {
             </div>
         </div>
     );
-};
+}
