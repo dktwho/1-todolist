@@ -37,7 +37,7 @@ function App() {
         <div className="App">
             <Todolist title={title} title2={title2} tasks={tasks1}/>
             <Todolist title={`${title} 2`} title3={title3} tasks={tasks2}/>
-            <Todolist title={`${title} 2`} title3={title3} tasks={tasks3}/>
+            <Todolist title={`${title} 3`} title3={title3} tasks={tasks3}/>
         </div>
     );
 }
