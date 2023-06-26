@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import {Todolist} from "./Todolist";
+import {TaskType, Todolist} from "./Todolist";
+
 
 function App() {
     const title1 = "Base Stack";
@@ -8,7 +9,7 @@ function App() {
     const title3 = 'Backend Stack';
 
 
-    const tasks1 = [
+    const tasks1: Array<TaskType>  = [
         {id: 1, title: "HTML&CSS", isDone: true},
         {id: 2, title: "JS", isDone: true},
         {id: 3, title: "ReactJS", isDone: false},
@@ -16,13 +17,13 @@ function App() {
         {id: 5, title: "Angular", isDone: true},
         {id: 6, title: "Svelte", isDone: true},
     ];
-    const tasks2 = [
+    const tasks2: TaskType[] = [
         {id: 1, title: "Hello world", isDone: true},
         {id: 2, title: "I am Happy", isDone: false},
         {id: 3, title: "Yo", isDone: false},
     ];
 
-    const tasks3 = [
+    const tasks3:  TaskType[] = [
         {id: 1, title: "Redux", isDone: false},
         {id: 2, title: "Thunk/Saga", isDone: false},
         {id: 3, title: "Redux Tkt", isDone: false},
