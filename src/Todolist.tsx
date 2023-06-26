@@ -7,18 +7,16 @@ export type TaskType = {
 };
 
 type PropsTypeTitle = {
-    title1: string;
-    title2?: string;
-    title3?: string;
+    title1?: string;
     // tasks: Array<TaskType>; generics
     tasks: TaskType[]; // new syntax for array
+    removeItem: (id: number) => void
 };
-
-export const Todolist = ({title1, title2, title3, tasks}: PropsTypeTitle) => {
+export const Todolist = ({title1, tasks, removeItem}: PropsTypeTitle) => {
     return (
         <div>
             <h3>
-                {title1} - {title2} {title3}
+                {title1}
             </h3>
             <div>
                 <input/>
@@ -30,6 +28,7 @@ export const Todolist = ({title1, title2, title3, tasks}: PropsTypeTitle) => {
                         <li key={el.id}>
                             <input type="checkbox" checked={el.isDone} readOnly/>
                             <span>{el.title}</span>
+                            <button onClick={() => removeItem(el.id)}>x</button>
                         </li>
                     );
                 })}
