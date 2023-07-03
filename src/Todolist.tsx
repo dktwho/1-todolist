@@ -60,6 +60,10 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
         filterItem(value)
     }
 
+    const removedTask = (id: string) => {
+        removeItem(id)
+    }
+
     return (
         <div>
             <h3>
@@ -75,14 +79,14 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
             </div>
             <ul>
                 {filterOfIsDone().map((el) => {
-                    const removedTask = () => {
-                        removeItem(el.id)
-                    }
+                    // const removedTask = () => {
+                    //     removeItem(el.id)
+                    // }
                     return (
                         <li key={el.id}>
                             <input type="checkbox" checked={el.isDone} readOnly/>
                             <span>{el.title}</span>
-                            <button onClick={removedTask}>x</button>
+                            <button onClick={() => removedTask(el.id)}>x</button>
                         </li>
                     );
                 })}
