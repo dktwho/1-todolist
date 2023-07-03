@@ -3,7 +3,7 @@ import React, {useState} from "react";
 type FilterTypeValue = 'All' | 'Active' | 'Completed'
 
 export type TaskType = {
-    id: number;
+    id: string;
     title: string;
     isDone: boolean;
 };
@@ -12,7 +12,7 @@ type PropsTypeTitle = {
     title1?: string;
     // tasks: Array<TaskType>; generics
     tasks: TaskType[]; // new syntax for array
-    removeItem: (id: number) => void;
+    removeItem: (id: string) => void;
     // filterItem: (value: FilterTypeValue) => void
 };
 export const Todolist = ({title1, tasks, removeItem,}: PropsTypeTitle) => {

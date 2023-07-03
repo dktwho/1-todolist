@@ -1,21 +1,23 @@
 import React, {useState} from "react";
 import "./App.css";
 import {TaskType, Todolist} from "./Todolist";
+import {v4} from 'uuid';
 
 
 function App() {
     const title1 = "Base Stack";
 
+
     let tasks1: Array<TaskType> = [
-        {id: 1, title: "HTML&CSS", isDone: true},
-        {id: 2, title: "JS", isDone: true},
-        {id: 3, title: "ReactJS", isDone: false},
-        {id: 4, title: "VueJS", isDone: false},
-        {id: 5, title: "Angular", isDone: true},
-        {id: 6, title: "Svelte", isDone: true},
+        {id: v4(), title: "HTML&CSS", isDone: true},
+        {id: v4(), title: "JS", isDone: true},
+        {id: v4(), title: "ReactJS", isDone: false},
+        {id: v4(), title: "VueJS", isDone: false},
+        {id: v4(), title: "Angular", isDone: true},
+        {id: v4(), title: "Svelte", isDone: true},
     ];
     const [tasks, setTasks] = useState(tasks1)
-    const removeItem = (id: number) => {
+    const removeItem = (id: string) => {
         setTasks(tasks.filter(el => el.id !== id))
     }
 
