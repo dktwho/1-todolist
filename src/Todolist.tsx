@@ -24,6 +24,7 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
         setValue(value)
     }
 
+
     const universalAddTask = () => {
         addTask(inputValue);
         setInputValue('')
@@ -33,7 +34,6 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
         setInputValue(e.currentTarget.value)
     }
 
-    // KeyboardEventHandler
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.code === 'Enter') {
             // addTask(inputValue);
@@ -61,16 +61,16 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
         }
     }
 
-    const filterAll = () => {
-        filterItem('All')
-    }
-
-    const filterActive = () => {
-        filterItem('Active')
-    }
-
-    const filterCompleted = () => {
-        filterItem('Completed')
+    const universalFilter = (value: FilterTypeValue) => {
+        if (value === 'All') {
+            filterItem('All')
+        }
+        if (value === 'Active') {
+            filterItem('Active')
+        }
+        if (value === 'Completed') {
+            filterItem('Completed')
+        }
     }
 
     return (
@@ -98,9 +98,13 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
                 })}
             </ul>
             <div>
-                <button onClick={filterAll}>All</button>
-                <button onClick={filterActive}>Active</button>
-                <button onClick={filterCompleted}>Completed</button>
+                {/*<button onClick={filterAll}>All</button>*/}
+                {/*<button onClick={filterActive}>Active</button>*/}
+                {/*<button onClick={filterCompleted}>Completed</button>*/}
+
+                <button onClick={() => universalFilter('All')}>All</button>
+                <button onClick={() => universalFilter('Active')}>Active</button>
+                <button onClick={() => universalFilter('Completed')}>Completed</button>
             </div>
         </div>
     );
