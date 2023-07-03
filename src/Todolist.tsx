@@ -36,19 +36,14 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.code === 'Enter') {
-            // addTask(inputValue);
-            // setInputValue('')
             universalAddTask()
         }
     }
 
     const onClickAddTask = () => {
-        // addTask(inputValue);
-        // setInputValue('')
         universalAddTask()
     }
     const filterOfIsDone = () => {
-
         switch (value) {
             case 'Active': {
                 return tasks.filter(el => !el.isDone)
@@ -80,11 +75,14 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
             </div>
             <ul>
                 {filterOfIsDone().map((el) => {
+                    const removedTask = () => {
+                        removeItem(el.id)
+                    }
                     return (
                         <li key={el.id}>
                             <input type="checkbox" checked={el.isDone} readOnly/>
                             <span>{el.title}</span>
-                            <button onClick={() => removeItem(el.id)}>x</button>
+                            <button onClick={removedTask}>x</button>
                         </li>
                     );
                 })}
