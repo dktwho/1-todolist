@@ -9,40 +9,26 @@ export type TaskType = {
 };
 
 type PropsTypeTitle = {
-    title1?: string;
     // tasks: Array<TaskType>; generics
+    // filterItem: (value: FilterTypeValue) => void
+    title1?: string;
     tasks: TaskType[]; // new syntax for array
     removeItem: (id: string) => void;
-    // filterItem: (value: FilterTypeValue) => void
     addTask: (value: string) => void
 };
 export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) => {
     const [value, setValue] = useState<FilterTypeValue>('All')
     const [inputValue, setInputValue] = useState<string>('')
 
+    // Filter function
     const filterItem = (value: FilterTypeValue) => {
         setValue(value)
     }
 
-
-    const universalAddTask = () => {
-        addTask(inputValue);
-        setInputValue('')
+    const universalFilter = (value: FilterTypeValue) => {
+        filterItem(value)
     }
 
-    const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.currentTarget.value)
-    }
-
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.code === 'Enter') {
-            universalAddTask()
-        }
-    }
-
-    const onClickAddTask = () => {
-        universalAddTask()
-    }
     const filterOfIsDone = () => {
         switch (value) {
             case 'Active': {
@@ -56,13 +42,33 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
         }
     }
 
-    const universalFilter = (value: FilterTypeValue) => {
-        filterItem(value)
+    // Add Task function
+    const universalAddTask = () => {
+        addTask(inputValue);
+        setInputValue('')
     }
 
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.code === 'Enter') {
+            universalAddTask()
+        }
+    }
+
+    const onClickAddTaskHandler = () => {
+        universalAddTask()
+    }
+
+    // Change Value control e.currentTarget.value function
+
+    const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.currentTarget.value)
+    }
+
+    // Removed function
     const removedTask = (id: string) => {
         removeItem(id)
     }
+
 
     return (
         <div>
@@ -75,13 +81,10 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
                     onChange={changeValue}
                     onKeyPress={onKeyPressHandler}
                 />
-                <button onClick={onClickAddTask}>text inside button</button>
+                <button onClick={onClickAddTaskHandler}>text inside button</button>
             </div>
             <ul>
                 {filterOfIsDone().map((el) => {
-                    // const removedTask = () => {
-                    //     removeItem(el.id)
-                    // }
                     return (
                         <li key={el.id}>
                             <input type="checkbox" checked={el.isDone} readOnly/>
