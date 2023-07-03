@@ -1,5 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
-
+import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 
 type FilterTypeValue = 'All' | 'Active' | 'Completed'
 
@@ -7,7 +6,6 @@ export type TaskType = {
     id: string;
     title: string;
     isDone: boolean;
-
 };
 
 type PropsTypeTitle = {
@@ -20,20 +18,34 @@ type PropsTypeTitle = {
 };
 export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) => {
     const [value, setValue] = useState<FilterTypeValue>('All')
-    const [inputValue, setInputValue] = useState('')
-
+    const [inputValue, setInputValue] = useState<string>('')
 
     const filterItem = (value: FilterTypeValue) => {
         setValue(value)
+    }
+
+    const universalAddTask = () => {
+        addTask(inputValue);
+        setInputValue('')
     }
 
     const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.currentTarget.value)
     }
 
+    // KeyboardEventHandler
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.code === 'Enter') {
+            // addTask(inputValue);
+            // setInputValue('')
+            universalAddTask()
+        }
+    }
+
     const onClickAddTask = () => {
-        addTask(inputValue);
-        setInputValue('')
+        // addTask(inputValue);
+        // setInputValue('')
+        universalAddTask()
     }
     const filterOfIsDone = () => {
 
@@ -55,8 +67,12 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
                 {title1}
             </h3>
             <div>
-                <input value={inputValue} onChange={changeValue} />
-                <button onClick={onClickAddTask} >text inside button</button>
+                <input
+                    value={inputValue}
+                    onChange={changeValue}
+                    onKeyPress={onKeyPressHandler}
+                />
+                <button onClick={onClickAddTask}>text inside button</button>
             </div>
             <ul>
                 {filterOfIsDone().map((el) => {
