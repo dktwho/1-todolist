@@ -61,6 +61,18 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
         }
     }
 
+    const filterAll = () => {
+        filterItem('All')
+    }
+
+    const filterActive = () => {
+        filterItem('Active')
+    }
+
+    const filterCompleted = () => {
+        filterItem('Completed')
+    }
+
     return (
         <div>
             <h3>
@@ -86,9 +98,9 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
                 })}
             </ul>
             <div>
-                <button onClick={() => filterItem('All')}>All</button>
-                <button onClick={() => filterItem('Active')}>Active</button>
-                <button onClick={() => filterItem('Completed')}>Completed</button>
+                <button onClick={filterAll}>All</button>
+                <button onClick={filterActive}>Active</button>
+                <button onClick={filterCompleted}>Completed</button>
             </div>
         </div>
     );
