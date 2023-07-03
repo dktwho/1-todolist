@@ -1,4 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {Button} from "./Button";
 
 type FilterTypeValue = 'All' | 'Active' | 'Completed'
 
@@ -69,6 +70,16 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
         removeItem(id)
     }
 
+    const result = filterOfIsDone().map((el) => {
+        return (
+            <li key={el.id}>
+                <input type="checkbox" checked={el.isDone} readOnly/>
+                <span>{el.title}</span>
+                <Button callback={() => removedTask(el.id)} name={'x'}></Button>
+            </li>
+        );
+    })
+
 
     return (
         <div>
@@ -81,23 +92,15 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
                     onChange={changeValue}
                     onKeyPress={onKeyPressHandler}
                 />
-                <button onClick={onClickAddTaskHandler}>text inside button</button>
+                <Button callback={onClickAddTaskHandler} name={'Add'}></Button>
             </div>
             <ul>
-                {filterOfIsDone().map((el) => {
-                    return (
-                        <li key={el.id}>
-                            <input type="checkbox" checked={el.isDone} readOnly/>
-                            <span>{el.title}</span>
-                            <button onClick={() => removedTask(el.id)}>x</button>
-                        </li>
-                    );
-                })}
+                {result}
             </ul>
             <div>
-                <button onClick={() => universalFilter('All')}>All</button>
-                <button onClick={() => universalFilter('Active')}>Active</button>
-                <button onClick={() => universalFilter('Completed')}>Completed</button>
+                <Button callback={() => universalFilter('All')} name={'All'}></Button>
+                <Button callback={() => universalFilter('Active')} name={'Active'}></Button>
+                <Button callback={() => universalFilter('Completed')} name={'Completed'}></Button>
             </div>
         </div>
     );
