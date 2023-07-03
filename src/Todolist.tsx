@@ -62,15 +62,7 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
     }
 
     const universalFilter = (value: FilterTypeValue) => {
-        if (value === 'All') {
-            filterItem('All')
-        }
-        if (value === 'Active') {
-            filterItem('Active')
-        }
-        if (value === 'Completed') {
-            filterItem('Completed')
-        }
+        filterItem(value)
     }
 
     return (
@@ -98,10 +90,6 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
                 })}
             </ul>
             <div>
-                {/*<button onClick={filterAll}>All</button>*/}
-                {/*<button onClick={filterActive}>Active</button>*/}
-                {/*<button onClick={filterCompleted}>Completed</button>*/}
-
                 <button onClick={() => universalFilter('All')}>All</button>
                 <button onClick={() => universalFilter('Active')}>Active</button>
                 <button onClick={() => universalFilter('Completed')}>Completed</button>
