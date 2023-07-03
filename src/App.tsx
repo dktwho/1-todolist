@@ -17,6 +17,13 @@ function App() {
         {id: v4(), title: "Svelte", isDone: true},
     ];
     const [tasks, setTasks] = useState(tasks1)
+
+    const addTask = (value: string) => {
+        let newTask = {id: v4(), title: value, isDone: false}
+        setTasks([newTask, ...tasks])
+    }
+
+
     const removeItem = (id: string) => {
         setTasks(tasks.filter(el => el.id !== id))
     }
@@ -27,6 +34,8 @@ function App() {
                 title1={`${title1} 1`}
                 tasks={tasks}
                 removeItem={removeItem}
+                addTask={addTask}
+
                 // filterItem={filterItem}
             />
         </div>

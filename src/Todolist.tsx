@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
+
 
 type FilterTypeValue = 'All' | 'Active' | 'Completed'
 
@@ -6,6 +7,7 @@ export type TaskType = {
     id: string;
     title: string;
     isDone: boolean;
+
 };
 
 type PropsTypeTitle = {
@@ -14,12 +16,24 @@ type PropsTypeTitle = {
     tasks: TaskType[]; // new syntax for array
     removeItem: (id: string) => void;
     // filterItem: (value: FilterTypeValue) => void
+    addTask: (value: string) => void
 };
-export const Todolist = ({title1, tasks, removeItem,}: PropsTypeTitle) => {
+export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) => {
     const [value, setValue] = useState<FilterTypeValue>('All')
+    const [inputValue, setInputValue] = useState('')
+
 
     const filterItem = (value: FilterTypeValue) => {
         setValue(value)
+    }
+
+    const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.currentTarget.value)
+    }
+
+    const onClickAddTask = () => {
+        addTask(inputValue);
+        setInputValue('')
     }
     const filterOfIsDone = () => {
 
@@ -41,8 +55,8 @@ export const Todolist = ({title1, tasks, removeItem,}: PropsTypeTitle) => {
                 {title1}
             </h3>
             <div>
-                <input/>
-                <button>text inside button</button>
+                <input value={inputValue} onChange={changeValue} />
+                <button onClick={onClickAddTask} >text inside button</button>
             </div>
             <ul>
                 {filterOfIsDone().map((el) => {
