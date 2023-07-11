@@ -65,6 +65,7 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
     // Change Value control e.currentTarget.value function
 
     const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
+        setError('')
         setInputValue(e.currentTarget.value)
     }
 
