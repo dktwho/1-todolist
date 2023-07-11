@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Button} from "./Button";
 import styled from './Todolist.module.css'
+import {Checkbox} from "./Checkbox";
 
 type FilterTypeValue = 'All' | 'Active' | 'Completed'
 
@@ -73,13 +74,17 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
         removeItem(id)
     }
 
+    const onChangeHandler = (tId: string, isDone: boolean) => {
+        changeIsDone(tId, isDone)
+    }
+
     const result = filterOfIsDone().map((el) => {
-        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            changeIsDone(el.id, e.currentTarget.checked)
-        }
+        // const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        //     changeIsDone(el.id, e.currentTarget.checked)
+        // }
         return (
             <li key={el.id} className={el.isDone ? styled.isDone : ''}>
-                <input type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
+                <Checkbox checked={el.isDone} callBack={( isDone) =>onChangeHandler(el.id, isDone) }   />
                 <span>{el.title}</span>
                 <Button className={''} callback={() => removedTask(el.id)} name={'x'}></Button>
             </li>
