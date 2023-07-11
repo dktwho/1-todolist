@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Button} from "./Button";
+import styled from './Todolist.module.css'
 
 type FilterTypeValue = 'All' | 'Active' | 'Completed'
 
@@ -21,6 +22,7 @@ type PropsTypeTitle = {
 export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: PropsTypeTitle) => {
     const [value, setValue] = useState<FilterTypeValue>('All')
     const [inputValue, setInputValue] = useState<string>('')
+    const [error, setError] = useState<string | null>(null)
 
     // Filter function
     const filterItem = (value: FilterTypeValue) => {
@@ -49,6 +51,8 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
         if (inputValue.trim()) {
             addTask(inputValue.trim());
             setInputValue('')
+        } else {
+            setError('Value is required')
         }
     }
 
@@ -76,6 +80,7 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
         }
         return (
             <li key={el.id}>
+
                 <input type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
                 <span>{el.title}</span>
                 <Button callback={() => removedTask(el.id)} name={'x'}></Button>
@@ -91,11 +96,13 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
             </h3>
             <div>
                 <input
+                    className={error ? styled.error : ''}
                     value={inputValue}
                     onChange={changeValue}
                     onKeyPress={onKeyPressHandler}
                 />
                 <Button callback={universalAddTask} name={'Add'}></Button>
+                <div className={error ? styled.errorMessage : ''}>{error}</div>
             </div>
             <ul>
                 {result}
