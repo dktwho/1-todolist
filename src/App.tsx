@@ -19,15 +19,12 @@ function App() {
     const [tasks, setTasks] = useState(tasks1)
 
     const addTask = (value: string) => {
-        let newTask = {id: v4(), title: value, isDone: false}
-        setTasks([newTask, ...tasks])
+        setTasks([{id: v4(), title: value, isDone: false}, ...tasks])
     }
-
 
     const changeIsDone = (idTask: string, newIsDone: boolean) => {
         setTasks(tasks.map(el => el.id === idTask ? {...el, isDone: newIsDone} : el))
     }
-
 
     const removeItem = (id: string) => {
         setTasks(tasks.filter(el => el.id !== id))
