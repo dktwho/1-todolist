@@ -23,6 +23,15 @@ function App() {
         setTasks([newTask, ...tasks])
     }
 
+    const changeIsDone = (id: string, newIsDone: boolean) => {
+        let currenTask = tasks.find(el => el.id === id)
+        if(currenTask) {
+            currenTask.isDone = newIsDone
+            setTasks([...tasks])
+        }
+        console.log(currenTask)
+    }
+
 
     const removeItem = (id: string) => {
         setTasks(tasks.filter(el => el.id !== id))
@@ -35,6 +44,7 @@ function App() {
                 tasks={tasks}
                 removeItem={removeItem}
                 addTask={addTask}
+                changeIsDone={changeIsDone}
 
                 // filterItem={filterItem}
             />

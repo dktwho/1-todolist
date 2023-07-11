@@ -16,8 +16,9 @@ type PropsTypeTitle = {
     tasks: TaskType[]; // new syntax for array
     removeItem: (id: string) => void;
     addTask: (value: string) => void
+    changeIsDone: (id: string, newIsDone: boolean) => void
 };
-export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) => {
+export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: PropsTypeTitle) => {
     const [value, setValue] = useState<FilterTypeValue>('All')
     const [inputValue, setInputValue] = useState<string>('')
 
@@ -71,9 +72,13 @@ export const Todolist = ({title1, tasks, removeItem, addTask}: PropsTypeTitle) =
     }
 
     const result = filterOfIsDone().map((el) => {
+
+        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+            changeIsDone(el.id, e.currentTarget.checked)
+        }
         return (
             <li key={el.id}>
-                <input type="checkbox" checked={el.isDone} readOnly/>
+                <input type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
                 <span>{el.title}</span>
                 <Button callback={() => removedTask(el.id)} name={'x'}></Button>
             </li>
