@@ -102,7 +102,7 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
                     onKeyPress={onKeyPressHandler}
                 />
                 <Button callback={universalAddTask} name={'Add'}></Button>
-                <div className={error ? styled.errorMessage : ''}>{error}</div>
+                {error &&  <div className={styled.errorMessage}>{error}</div>}
             </div>
             <ul>
                 {result}
