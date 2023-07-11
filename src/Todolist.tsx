@@ -46,18 +46,16 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
 
     // Add Task function
     const universalAddTask = () => {
-        addTask(inputValue);
-        setInputValue('')
+        if (inputValue.trim()) {
+            addTask(inputValue.trim());
+            setInputValue('')
+        }
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.code === 'Enter') {
             universalAddTask()
         }
-    }
-
-    const onClickAddTaskHandler = () => {
-        universalAddTask()
     }
 
     // Change Value control e.currentTarget.value function
@@ -97,7 +95,7 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
                     onChange={changeValue}
                     onKeyPress={onKeyPressHandler}
                 />
-                <Button callback={onClickAddTaskHandler} name={'Add'}></Button>
+                <Button callback={universalAddTask} name={'Add'}></Button>
             </div>
             <ul>
                 {result}
