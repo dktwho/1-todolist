@@ -79,9 +79,8 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
             changeIsDone(el.id, e.currentTarget.checked)
         }
         return (
-            <li key={el.id}>
-
-                <input type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
+            <li key={el.id} className={el.isDone ? styled.isDone : '' }>
+                <input  type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
                 <span>{el.title}</span>
                 <Button callback={() => removedTask(el.id)} name={'x'}></Button>
             </li>
