@@ -23,13 +23,9 @@ function App() {
         setTasks([newTask, ...tasks])
     }
 
-    const changeIsDone = (id: string, newIsDone: boolean) => {
-        let currenTask = tasks.find(el => el.id === id)
-        if(currenTask) {
-            currenTask.isDone = newIsDone
-            setTasks([...tasks])
-        }
-        console.log(currenTask)
+
+    const changeIsDone = (idTask: string, newIsDone: boolean) => {
+        setTasks(tasks.map(el => el.id === idTask ? {...el, isDone: newIsDone} : el))
     }
 
 
@@ -45,8 +41,6 @@ function App() {
                 removeItem={removeItem}
                 addTask={addTask}
                 changeIsDone={changeIsDone}
-
-                // filterItem={filterItem}
             />
         </div>
     );
