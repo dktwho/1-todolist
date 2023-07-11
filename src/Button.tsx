@@ -3,14 +3,15 @@ import React from 'react';
 type ButtonTypeProps = {
     name: string;
     callback: () => void
+    className: string
 }
 
-export function Button({name, callback}: ButtonTypeProps) {
+export function Button({name, callback,className}: ButtonTypeProps) {
     const onClickHandler = ( ) => {
         callback()
     }
     return (
-        <button onClick={onClickHandler}>{name}</button>
+        <button className={className} onClick={onClickHandler}>{name}</button>
     );
 }
 

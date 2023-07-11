@@ -18,19 +18,15 @@ type PropsTypeTitle = {
     removeItem: (id: string) => void;
     addTask: (value: string) => void
     changeIsDone: (id: string, newIsDone: boolean) => void
+
 };
 export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: PropsTypeTitle) => {
     const [value, setValue] = useState<FilterTypeValue>('All')
     const [inputValue, setInputValue] = useState<string>('')
-    const [error, setError] = useState<string | null>(null)
-
-    // Filter function
-    const filterItem = (value: FilterTypeValue) => {
-        setValue(value)
-    }
+    const [error, setError] = useState<string | null>('')
 
     const universalFilter = (value: FilterTypeValue) => {
-        filterItem(value)
+        setValue(value)
     }
 
     const filterOfIsDone = () => {
@@ -51,6 +47,8 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
         if (inputValue.trim()) {
             addTask(inputValue.trim());
             setInputValue('')
+            universalFilter('All')
+
         } else {
             setError('Value is required')
         }
@@ -59,6 +57,7 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.code === 'Enter') {
             universalAddTask()
+            universalFilter('All')
         }
     }
 
@@ -75,15 +74,14 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
     }
 
     const result = filterOfIsDone().map((el) => {
-
         const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
             changeIsDone(el.id, e.currentTarget.checked)
         }
         return (
-            <li key={el.id} className={el.isDone ? styled.isDone : '' }>
-                <input  type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
+            <li key={el.id} className={el.isDone ? styled.isDone : ''}>
+                <input type="checkbox" checked={el.isDone} onChange={onChangeHandler}/>
                 <span>{el.title}</span>
-                <Button callback={() => removedTask(el.id)} name={'x'}></Button>
+                <Button className={''} callback={() => removedTask(el.id)} name={'x'}></Button>
             </li>
         );
     })
@@ -101,16 +99,25 @@ export const Todolist = ({title1, tasks, removeItem, addTask, changeIsDone}: Pro
                     onChange={changeValue}
                     onKeyPress={onKeyPressHandler}
                 />
-                <Button callback={universalAddTask} name={'Add'}></Button>
-                {error &&  <div className={styled.errorMessage}>{error}</div>}
+                <Button className={''} callback={universalAddTask} name={'Add'}></Button>
+                {error && <div className={styled.errorMessage}>{error}</div>}
             </div>
             <ul>
                 {result}
             </ul>
             <div>
-                <Button callback={() => universalFilter('All')} name={'All'}></Button>
-                <Button callback={() => universalFilter('Active')} name={'Active'}></Button>
-                <Button callback={() => universalFilter('Completed')} name={'Completed'}></Button>
+                <Button
+                    className={value === 'All' ? styled.activeFilter : ''}
+                    callback={() => universalFilter('All')}
+                    name={'All'}></Button>
+                <Button
+                    className={value === 'Active' ? styled.activeFilter : ''}
+                    callback={() => universalFilter('Active')}
+                    name={'Active'}></Button>
+                <Button
+                    className={value === 'Completed' ? styled.activeFilter : ''}
+                    callback={() => universalFilter('Completed')}
+                    name={'Completed'}></Button>
             </div>
         </div>
     );
