@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useReducer, useState} from "react";
 import "./App.css";
 import {TaskType, Todolist} from "./Todolist";
 import {v4} from 'uuid';
+import {removeTaskAC, TasksReducer} from "./reducers/TasksReducer";
 
 
 function App() {
@@ -16,18 +17,19 @@ function App() {
         {id: v4(), title: "Angular", isDone: true},
         {id: v4(), title: "Svelte", isDone: true},
     ];
-    const [tasks, setTasks] = useState(tasks1)
+    const [tasks, tasksDispatch] = useReducer(TasksReducer, tasks1)
 
     const addTask = (value: string) => {
-        setTasks([{id: v4(), title: value, isDone: false}, ...tasks])
+        // setTasks([{id: v4(), title: value, isDone: false}, ...tasks])
     }
 
     const changeIsDone = (idTask: string, newIsDone: boolean) => {
-        setTasks(tasks.map(el => el.id === idTask ? {...el, isDone: newIsDone} : el))
+        // setTasks(tasks.map(el => el.id === idTask ? {...el, isDone: newIsDone} : el))
     }
 
     const removeItem = (id: string) => {
-        setTasks(tasks.filter(el => el.id !== id))
+         tasksDispatch(removeTaskAC(id))
+
     }
 
     return (
