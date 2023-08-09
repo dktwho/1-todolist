@@ -1,8 +1,8 @@
-import React, {useReducer, useState} from "react";
+import React, {useReducer} from "react";
 import "./App.css";
 import {TaskType, Todolist} from "./Todolist";
 import {v4} from 'uuid';
-import {addTaskAC, removeTaskAC, TasksReducer} from "./reducers/TasksReducer";
+import {addTaskAC, changeIsDoneAC, removeTaskAC, TasksReducer} from "./reducers/TasksReducer";
 
 
 function App() {
@@ -26,10 +26,11 @@ function App() {
 
     const changeIsDone = (idTask: string, newIsDone: boolean) => {
         // setTasks(tasks.map(el => el.id === idTask ? {...el, isDone: newIsDone} : el))
+        tasksDispatch(changeIsDoneAC(idTask, newIsDone))
     }
 
     const removeItem = (id: string) => {
-         tasksDispatch(removeTaskAC(id))
+        tasksDispatch(removeTaskAC(id))
 
     }
 
